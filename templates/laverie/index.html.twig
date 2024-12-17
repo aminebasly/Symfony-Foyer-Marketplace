@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Laverie index{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+    <h1>Laverie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdLaverie</th>
+                <th>NomLaverie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for laverie in laveries %}
+            <tr>
+                <td>{{ laverie.id }}</td>
+                <td>{{ laverie.nomLaverie }}</td>
+                <td>
+                    <a href="{{ path('app_laverie_show', {'id': laverie.id}) }}">show</a>
+                    <a href="{{ path('app_laverie_edit', {'id': laverie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_laverie_new') }}">Create new</a>
+{% endblock %}

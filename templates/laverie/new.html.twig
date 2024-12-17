@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Laverie{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+    <h1>Create new Laverie</h1>
+
+    {{ include('laverie/_form.html.twig') }}
+
+    <a href="{{ path('app_laverie_index') }}">back to list</a>
+{% endblock %}

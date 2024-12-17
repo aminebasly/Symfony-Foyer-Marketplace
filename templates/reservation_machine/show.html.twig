@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationMachine{% endblock %}
+
+{% block body %}
+    <h1>ReservationMachine</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation_machine.id }}</td>
+            </tr>
+            <tr>
+                <th>IdReservationMachine</th>
+                <td>{{ reservation_machine.idReservationMachine }}</td>
+            </tr>
+            <tr>
+                <th>DateReservation</th>
+                <td>{{ reservation_machine.dateReservation ? reservation_machine.dateReservation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HeureDReservation</th>
+                <td>{{ reservation_machine.heureDReservation }}</td>
+            </tr>
+            <tr>
+                <th>DuréeReservation</th>
+                <td>{{ reservation_machine.duréeReservation }}</td>
+            </tr>
+            <tr>
+                <th>NbVetements</th>
+                <td>{{ reservation_machine.nbVetements }}</td>
+            </tr>
+            <tr>
+                <th>Cycle</th>
+                <td>{{ reservation_machine.cycle }}</td>
+            </tr>
+            <tr>
+                <th>Degre</th>
+                <td>{{ reservation_machine.degre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_machine_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_machine_edit', {'id': reservation_machine.id}) }}">edit</a>
+
+    {{ include('reservation_machine/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Ma chambre{% endblock %}
+
+{% block body %}
+<h1>Votre chambre</h1>
+<p>Numéro de chambre : {{ user.chambre.numero }}</p>
+<p>Étage : {{ user.chambre.etage }}</p>
+<!-- Ajoutez d'autres informations sur la chambre -->
+{% endblock %}

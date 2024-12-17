@@ -1,0 +1,58 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Dashboard Foyer{% endblock %}
+
+{% block body %}
+<div class="user-header" style="background-image: url({{asset('images/fond.jpg')}});">
+                    <h1 class="mb-3">Bienvenue,<br>
+                    Numéro de chambre : </h1>
+                    <p class="mb-3">Numéro de chambre : </p>
+        
+    </div>
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>MotDePasse</th>
+                <th>Role</th>
+                <th>IdEtudiant</th>
+                <th>Specialite</th>
+                <th>IdTechnicien</th>
+                <th>Service</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.motDePasse }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.idEtudiant }}</td>
+                <td>{{ user.specialite }}</td>
+                <td>{{ user.idTechnicien }}</td>
+                <td>{{ user.service }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_user_new') }}">Create new</a> #}
+    </body>
+{% endblock %}

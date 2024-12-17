@@ -1,0 +1,19 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Liste des Laveries{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+    <h1>Nos Laveries</h1>
+    <ul>
+        {% for laverie in laveries %}
+            <li>
+                <a href="{{ path('laverie_detail', { id: laverie.id }) }}">{{ laverie.nomLaverie }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

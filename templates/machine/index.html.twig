@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machine index{% endblock %}
+
+{% block body %}
+
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+    <h1>Machine index</h1>
+
+    <table class="table">
+    
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StatutMachine</th>
+                <th>TypeMachine</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for machine in machines %}
+        <form action="{{path('Recherche',{'tt':machine.typeMachine})}}" method="">
+            <tr>
+                <td>{{ machine.id }}</td>
+                <td>{{ machine.statutMachine }}</td>
+                <td>{{ machine.typeMachine }}</td>
+                <td>
+                    <a href="{{ path('app_machine_show', {'id': machine.id}) }}">show</a>
+                    <a href="{{ path('app_machine_edit', {'id': machine.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+<input type="text" placeholder="search" name="ss">
+    <input type="submit" value="search">
+</form>
+</form>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_machine_new') }}">Create new</a>
+  <br>
+<a href="{{ path('pdf') }}" class="btn btn-primary">Exporter vers PDF</a>
+<br>  
+{% endblock %}

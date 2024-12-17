@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Foyer Universitaire{% endblock %}
+
+{% block body %}
+<!-- En-tête avec vidéo en forme de bandeau et texte centré -->
+
+    <section class="hero-section">
+    <!-- Vidéo de fond -->
+    <video autoplay muted loop class="background-video">
+        <source src="{{ asset('/videos/background.mp4') }}" type="video/mp4">
+        Votre navigateur ne supporte pas les vidéos.
+    </video>
+    <!-- Texte sur la vidéo -->
+<div class="hero-banner">
+    <div class="hero-content">
+        <h1 class="hero-title">Bienvenue à notre foyer universitaire !</h1>
+        <p class="hero-caption">Votre résidence, votre confort</p>
+    </div>
+</div>
+
+
+</section>
+
+<body style="background-image: url('{{ asset('images/fond.jpg') }}')" >
+
+<section class="feature-bar">
+    <div class="feature-bar-container">
+        <div class="feature-item">
+            <i class="fas fa-bed fa-3x text-warning mb-3"></i>
+            <p>Chambres modernes</p>
+        </div>
+        <div class="feature-item">
+            <div class="icon icon-common-room"></div>
+            <p>Salle commune</p>
+        </div>
+        <div class="feature-item">
+            <div class="icon icon-payment"></div>
+            <p>Paiement en ligne</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-shower fa-3x text-warning mb-3"></i>
+            <p>Service d'entretien</p>
+        </div>
+    </div>
+</section>
+
+<section class="features" >
+<h1 class="font-weight-bold">Nos Services</h1>
+    <div class="container">
+    
+        <div class="feature">
+            <h2 class="card-title" >Nos Chambres</h2>
+            <p>Découvrez des chambres conçues pour offrir confort et sérénité à nos résidents. Chaque espace est équipé de tout ce dont vous avez besoin pour étudier, vous reposer et vous sentir chez vous. Que vous soyez en quête de tranquillité ou de convivialité, nos chambres allient modernité et praticité pour répondre à vos attentes.</p>
+        </div>
+        <div class="feature">
+            
+            <h2 class="card-title" >Notre Laverie</h2>
+            <p>Fini les contraintes de linge ! Avec notre laverie accessible et équipée de machines modernes, nous vous simplifions la vie. Gagnez du temps avec un service de lavage et de séchage rapide, pensé pour répondre aux besoins des étudiants. Propre, pratique et à votre disposition, la laverie facilite votre quotidien.</p>
+        </div>
+        <div class="feature">
+            <h2 class="card-title" >Notre Marketplace</h2>
+            <p>Notre marketplace est un espace dédié où vous pouvez accéder à une variété de produits et de services essentiels pour votre vie étudiante. Que vous cherchiez du matériel pour vos études ou des articles pour équiper votre chambre, notre marketplace vous connecte aux meilleures offres, pensées pour les résidents.</p>
+        </div>
+        <div class="feature">
+            <h2 class="card-title" >Notre Service Maintenance </h2>
+            <p>Votre confort est notre priorité. Notre service de maintenance est là pour garantir un environnement toujours fonctionnel et agréable. Qu'il s'agisse de petits travaux d'entretien, de réparations techniques ou de demandes spécifiques, notre équipe réactive et qualifiée s'occupe de tout. Concentrez-vous sur vos études, nous nous occupons du reste.</p>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>À PROPOS DE NOUS</h2>
+            <p>
+                Bienvenue dans notre résidence universitaire. Nous offrons un espace sûr, confortable,
+                et innovant pour les étudiants, accompagné de services essentiels tels que des chambres
+                modernes, une laverie, un marketplace, et un service de maintenance.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="{{ asset('images/apropos.jpg') }}" alt="À propos image">
+        </div>
+    </div>
+</section>
+
+
+
+
+</div>
+
+<!-- Section des Services avec icônes et description -->
+<section  class="section">
+    <div class="container fade-in">
+        <h2 class="font-weight-bold">Nos Services</h2>
+        <p class="text-muted">Découvrez ce que nous proposons</p>
+        <div class="row">
+            <div class="col-md-4">
+                <i class="fas fa-bed fa-3x text-warning mb-3"></i>
+                <h4>Chambres</h4>
+                <p>Des chambres confortables et bien équipées pour les étudiants.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-wifi fa-3x text-warning mb-3"></i>
+                <h4>Wi-Fi et Connexion</h4>
+                <p>Accès internet rapide pour tous les résidents.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-shower fa-3x text-warning mb-3"></i>
+                <h4>Services d'entretien</h4>
+                <p>Propreté et entretien régulier pour un cadre agréable.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<br><br><br>
+
+<!-- Section Galerie avec effet de survol pour les images -->
+<section id="portfolio" class="section">
+    <div class="container fade-in">
+        <h2 class="font-weight-bold">Galerie</h2>
+        <p class="text-muted">Découvrez notre foyer en images</p>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <img src="/images/chambre.jpg" class="img-fluid rounded shadow" alt="Chambre du foyer">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/images/salle.jpg" class="img-fluid rounded shadow" alt="Salle commune">
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="/images/reception.jpg" class="img-fluid rounded shadow" alt="Réception">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ajoutez une section contact (optionnelle) -->
+<section id="contact" class="section">
+    <div class="container fade-in">
+        <h2 class="font-weight-bold">Contact</h2>
+        <p class="text-muted">Nous contacter pour plus d'informations</p>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Votre nom">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Votre email">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="4" placeholder="Votre message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Envoyer</button>
+        </form>
+    </div>
+</section>
+</body>
+{% endblock %}
+
+

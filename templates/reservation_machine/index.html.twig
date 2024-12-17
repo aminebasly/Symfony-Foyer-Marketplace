@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationMachine index{% endblock %}
+
+{% block body %}
+    <h1>ReservationMachine index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdReservationMachine</th>
+                <th>DateReservation</th>
+                <th>HeureDReservation</th>
+                <th>DuréeReservation</th>
+                <th>NbVetements</th>
+                <th>Cycle</th>
+                <th>Degre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation_machine in reservation_machines %}
+            <tr>
+                <td>{{ reservation_machine.id }}</td>
+                <td>{{ reservation_machine.idReservationMachine }}</td>
+                <td>{{ reservation_machine.dateReservation ? reservation_machine.dateReservation|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation_machine.heureDReservation }}</td>
+                <td>{{ reservation_machine.duréeReservation }}</td>
+                <td>{{ reservation_machine.nbVetements }}</td>
+                <td>{{ reservation_machine.cycle }}</td>
+                <td>{{ reservation_machine.degre }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_machine_show', {'id': reservation_machine.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_machine_edit', {'id': reservation_machine.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_machine_new') }}">Create new</a>
+{% endblock %}

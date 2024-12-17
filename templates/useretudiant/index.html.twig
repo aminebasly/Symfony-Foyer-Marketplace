@@ -1,0 +1,115 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Hello UseretudiantController!{% endblock %}
+
+{% block body %}
+<div class="user-header" style="background-image: url({{asset('images/fond.jpg')}});">
+                    <h1 class="mb-3">Bienvenue,<br>
+                    Numéro de chambre : </h1>
+                    <p class="mb-3">Numéro de chambre : </p>
+        
+    </div>
+    <body style="background-image: url('{{ asset('images/fond.jpg') }}')" >
+
+<section class="feature-bar">
+    <div class="feature-bar-container">
+        <div class="feature-item">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <a href="" class="btn btn-primary mt-2">Modifier mes informations</a>
+                </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" >
+<h1 class="font-weight-bold">Nos Services</h1>
+    <div class="container">
+    
+        <div class="feature">
+            <h2 class="card-title" >Nos Chambres</h2>
+            <p>Découvrez des chambres conçues pour offrir confort et sérénité à nos résidents. Chaque espace est équipé de tout ce dont vous avez besoin pour étudier, vous reposer et vous sentir chez vous. Que vous soyez en quête de tranquillité ou de convivialité, nos chambres allient modernité et praticité pour répondre à vos attentes.</p>
+        </div>
+        <div class="feature">
+            
+            <h2 class="card-title" >Notre Laverie</h2>
+            <p>Fini les contraintes de linge ! Avec notre laverie accessible et équipée de machines modernes, nous vous simplifions la vie. Gagnez du temps avec un service de lavage et de séchage rapide, pensé pour répondre aux besoins des étudiants. Propre, pratique et à votre disposition, la laverie facilite votre quotidien.</p>
+        </div>
+        <div class="feature">
+            <h2 class="card-title" >Notre Marketplace</h2>
+            <p>Notre marketplace est un espace dédié où vous pouvez accéder à une variété de produits et de services essentiels pour votre vie étudiante. Que vous cherchiez du matériel pour vos études ou des articles pour équiper votre chambre, notre marketplace vous connecte aux meilleures offres, pensées pour les résidents.</p>
+        </div>
+        <div class="feature">
+            <h2 class="card-title" >Notre Service Maintenance </h2>
+            <p>Votre confort est notre priorité. Notre service de maintenance est là pour garantir un environnement toujours fonctionnel et agréable. Qu'il s'agisse de petits travaux d'entretien, de réparations techniques ou de demandes spécifiques, notre équipe réactive et qualifiée s'occupe de tout. Concentrez-vous sur vos études, nous nous occupons du reste.</p>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="about-container">
+        <div class="about-text">
+            <h2>À PROPOS DE NOUS</h2>
+            <p>
+                Bienvenue dans notre résidence universitaire. Nous offrons un espace sûr, confortable,
+                et innovant pour les étudiants, accompagné de services essentiels tels que des chambres
+                modernes, une laverie, un marketplace, et un service de maintenance.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="{{ asset('images/apropos.jpg') }}" alt="À propos image">
+        </div>
+    </div>
+</section>
+<div class="container mt-4">
+    <!-- Laverie -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white text-center">
+            Laverie
+        </div>
+        <div class="card-body">
+         
+                <p><strong>Machine réservée :</strong> </p>
+                <p><strong>Temps restant :</strong> minutes</p>
+          
+                <p>Aucune machine réservée.</p>
+            
+        </div>
+    </div>
+
+    <!-- Maintenance -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-warning text-dark text-center">
+            Gestion de Maintenance
+        </div>
+        <div class="card-body">
+            <h5>Réclamations :</h5>
+            
+                <ul>
+                    
+                        <li></li>
+                    
+                </ul>
+           
+                <p>Aucune réclamation.</p>
+         
+        </div>
+    </div>
+
+    <!-- Marketplace -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-success text-white text-center">
+            Marketplace
+        </div>
+        <div class="card-body">
+           
+                <p><strong>Commande en cours :</strong> </p>
+                <p><strong>Prix :</strong> TND</p>
+                <p><strong>Temps restant :</strong>heures</p>
+            
+                <p>Aucune commande en cours.</p>
+          
+        </div>
+    </div>
+</div>
+
+{% endblock %}

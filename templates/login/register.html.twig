@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Inscription</h1>
+    <p>CONNECTEZ VOUS> INSCRIPTION</p>
+</div>
+<div class="container">
+  <div class="form-section">
+    <h2>Inscription</h2>
+    <p>L'Aventure commence ici 🚀</p>
+    {{ form_start(f) }}
+
+                    <!-- Boutons Radio : Étudiant / Technicien -->
+                    <div class="form-group">
+                        {{ form_label(f.role) }}
+                        <div>
+                            {{ form_widget(f.role) }}
+                        </div>
+                    </div>
+
+                    <!-- Informations Technicien (Affiché si Technicien sélectionné) -->
+                    <div id="technician-info" class="form-section" style="display: none;">
+                        <h3>Informations Technicien</h3>
+                        <div class="form-group">
+                            {{ form_label(f.idTechnicien) }}
+                            {{ form_widget(f.idTechnicien) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(f.service) }}
+                            {{ form_widget(f.service) }}
+                        </div>
+                    </div>
+
+                    <!-- Informations Étudiant (Affiché si Étudiant sélectionné) -->
+                    <div id="student-info" class="form-section">
+                        <h3>Informations Étudiant</h3>
+                        <div class="form-group">
+                            {{ form_label(f.idEtudiant) }}
+                            {{ form_widget(f.idEtudiant) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(f.specialite) }}
+                            {{ form_widget(f.specialite) }}
+                        </div>
+                    </div>
+
+                    <!-- Informations Générales -->
+                    <h3>Informations Générales</h3>
+                    <div class="form-group">
+                        {{ form_label(f.nom) }}
+                        {{ form_widget(f.nom) }}
+                    </div>
+                      <div class="form-group">
+                        {{ form_label(f.prenom) }}
+                        {{ form_widget(f.prenom) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.email) }}
+                        {{ form_widget(f.email) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.motDePasse) }}
+                        {{ form_widget(f.motDePasse) }}
+                    </div>
+                    {# <div class="form-group">
+                        {{ form_label(f.confirm_password) }}
+                        {{ form_widget(f.confirm_password) }}
+                    </div> #}
+
+                    <button class="btn btn-primary">S'inscrire</button>
+
+                {{ form_end(f) }}
+            
+  </div>
+    <div class="header">
+    <div class="info">
+      <p><strong>Avec notre programme, profitez de :</strong></p>
+      <ul>
+        <li>Un accès facilité à vos services</li>
+        <li>Des promotions exclusives</li>
+        <li>Une expérience personnalisée</li>
+      </ul>
+    </div>
+  </div>
+    <div class="header">
+    <img src="{{ asset('images/logoedutine.png') }}" alt="Logo" class="logo" />
+    </div>
+</div>
+
+
+
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+            const roleRadio = document.querySelectorAll('[name="user[role]"]');
+            const technicianInfo = document.getElementById('technician-info');
+            const studentInfo = document.getElementById('student-info');
+            
+            roleRadio.forEach(function (radio) {
+                radio.addEventListener('change', function () {
+                    if (radio.value === 'Technicien') {
+                        technicianInfo.style.display = 'block';
+                        studentInfo.style.display = 'none';
+                    } else {
+                        technicianInfo.style.display = 'none';
+                        studentInfo.style.display = 'block';
+                    }
+                });
+            });
+        });
+
+</script>
+{% endblock %}
+
+
+

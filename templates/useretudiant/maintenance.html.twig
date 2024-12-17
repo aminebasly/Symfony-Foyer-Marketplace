@@ -1,0 +1,14 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Maintenance{% endblock %}
+
+{% block body %}
+<h1>Réclamations de maintenance</h1>
+<ul>
+    {% for reclamation in reclamations %}
+        <li>{{ reclamation.description }} - {{ reclamation.date|date('d/m/Y') }}</li>
+    {% else %}
+        <li>Aucune réclamation enregistrée.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+
+<section class="contact-section">
+    <h2>Informations de Contact</h2>
+    <div class="contact-cards">
+        <div class="contact-card">
+            <h3>Adresse:</h3>
+            <p>198 Rue Example, Tunis, Tunisie</p>
+        </div>
+        <div class="contact-card">
+            <h3>Téléphone:</h3>
+            <p>+216 123 456 789</p>
+        </div>
+        <div class="contact-card">
+            <h3>Email:</h3>
+            <p>info@votrefoyer.com</p>
+        </div>
+    </div>
+
+    <h2>Nous Contacter</h2>
+    <form class="contact-form">
+        <label for="name">Votre nom</label>
+        <input type="text" id="name" name="name" placeholder="Entrez votre nom">
+        
+        <label for="email">Votre email</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre email">
+        
+        <label for="subject">Sujet</label>
+        <input type="text" id="subject" name="subject" placeholder="Entrez le sujet">
+        
+        <label for="message">Votre message</label>
+        <textarea id="message" name="message" placeholder="Tapez votre message ici"></textarea>
+        
+        <button type="submit">Envoyer</button>
+    </form>
+</section>
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5231.950157785062!2d2.344292!3d49.030081!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e64264f8e9c637%3A0xca2e5e74b748c376!2s1%20Rue%20Descartes%2C%2095330%20Domont%2C%20France!5e0!3m2!1sfr!2stn!4v1719136555571!5m2!1sfr!2stn" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% block body %}
+<style>
+    .header {
+        text-align: center;
+        color: #4CAF50;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    .table td {
+        text-align: center;
+    }
+
+    .logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50px;
+    }
+
+    .no-records {
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+
+    <h1>Machine index</h1>
+
+    <table id="example" >
+    
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>StatutMachine</th>
+                <th>TypeMachine</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for machine in machines %}
+            <tr>
+                <td>{{ machine.id }}</td>
+                <td>{{ machine.statutMachine }}</td>
+                <td>{{ machine.typeMachine }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+  <br>
+
+<br> 
+
+{% endblock %}

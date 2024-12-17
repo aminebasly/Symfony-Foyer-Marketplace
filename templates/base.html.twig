@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <body>
+ <header class="navbar transparent">
+    <div class="container">
+        <!-- Logos -->
+        <a href="#" class="logo">
+            <!-- Logo transparent -->
+            <img src="{{ asset('images/logotransparent.png') }}" alt="Logo Transparent" class="logo-image logo-transparent">
+            <!-- Logo normal -->
+            <img src="{{ asset('images/logoedutine.png') }}" alt="Logo Normal" class="logo-image logo-scrolled">
+        </a>
+
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="{{ path('app_home') }}">ACCUEIL</a></li>
+                <li><a href="#about">À PROPOS DE NOUS</a></li>
+                <li><a href="#services">NOS SERVICES</a></li>
+                <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                <li><a href="{{ path('app_login') }}" class="btn-login">SE CONNECTER</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</header>
+
+
+        {% block body %}{% endblock %}
+            <script>
+document.querySelectorAll('.navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+
+        // Si le href commence par '#' (une ancre interne), empêchez le comportement par défaut
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetElement = document.querySelector(href);
+
+            // Défilement fluide uniquement pour les ancres internes
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // Sinon, pour les liens externes ou relatifs (comme /contact), laissez le comportement par défaut
+            return;
+        }
+    });
+});
+
+        const faders = document.querySelectorAll('.fade-in');
+            window.addEventListener('scroll', () => {
+                faders.forEach(fader => {
+                  const rect = fader.getBoundingClientRect();
+                  if (rect.top < window.innerHeight) {
+                     fader.classList.add('show');
+        }
+    });
+});
+
+    </script>
+    <script>
+    window.addEventListener('scroll', function () {
+        const navbar = document.querySelector('.navbar');
+
+        // Change la classe en fonction de la position du défilement
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+            navbar.classList.remove('transparent');
+        } else {
+            navbar.classList.add('transparent');
+            navbar.classList.remove('scrolled');
+        }
+    });
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+      <footer class="footer">
+  <div class="footer-container">
+    <!-- Logo et contact -->
+    <div class="footer-section">
+      <img src="{{ asset('images/logotransparent.png') }}" alt="Logo" class="footer-logo">
+      <p>Contactez-Nous</p>
+      <p><i class="fas fa-phone"></i> +216 71 234 567</p>
+      <p><i class="fas fa-envelope"></i> foyeruniv@example.com</p>
+    </div>
+    
+    <!-- À propos -->
+    <div class="footer-section">
+      <p>À propos</p>
+      <ul>
+        <li><a href="/nos-services">Nos services</a></li>
+        <li><a href="/a-propos">À propos de nous</a></li>
+      </ul>
+    </div>
+    
+    <!-- Aide -->
+    <div class="footer-section">
+      <p>Aide</p>
+      <ul>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/espace-etudiant">Espace étudiant</a></li>
+      </ul>
+    </div>
+    
+    <!-- Action principale -->
+    <div class="footer-section">
+      <p>Démarrez ici</p>
+      <p>Rejoignez notre résidence et accédez à un espace de vie agréable et fonctionnel.</p>
+      <a href="/inscription" class="footer-button">Inscrivez-vous</a>
+    </div>
+  </div>
+</footer>
+    </body>
+  
+
+</html>

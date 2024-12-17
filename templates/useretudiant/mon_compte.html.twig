@@ -1,0 +1,10 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<h1>Bienvenue dans votre compte</h1>
+<p>Nom : {{ user.nom }}</p>
+<p>Prénom : {{ user.prenom }}</p>
+<!-- Ajoutez d'autres informations utilisateur -->
+{% endblock %}

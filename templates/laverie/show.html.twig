@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Laverie{% endblock %}
+
+{% block body %}
+    <h1>Laverie</h1>
+<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Contactez-nous</h1>
+    <p>HOME > CONTACT</p>
+</div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ laverie.id }}</td>
+            </tr>
+            <tr>
+                <th>NomLaverie</th>
+                <td>{{ laverie.nomLaverie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_laverie_index') }}">back to list</a>
+
+    <a href="{{ path('app_laverie_edit', {'id': laverie.id}) }}">edit</a>
+
+    {{ include('laverie/_delete_form.html.twig') }}
+{% endblock %}

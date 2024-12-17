@@ -1,0 +1,11 @@
+{% extends 'baseuser.html.twig' %}
+
+{% block title %}Marketplace{% endblock %}
+
+{% block body %}
+<h1>Votre commande en cours</h1>
+<p>Article : {{ commande.article }}</p>
+<p>Prix : {{ commande.prix }} TND</p>
+<p>Temps restant : {{ commande.tempsRestant }} heures</p>
+<!-- Ajoutez d'autres détails sur les commandes -->
+{% endblock %}
