@@ -1,0 +1,79 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Reclamation Index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="page-title">Liste des Réclamations</h1>
+
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Catégorie</th>
+                        <th>Objet</th>
+                        <th>Description</th>
+                        <th>Date de réclamation</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reclamation in reclamations %}
+                        <tr>
+                            <td>{{ reclamation.id }}</td>
+                            <td>{{ reclamation.categorie }}</td>
+                            <td>{{ reclamation.objet }}</td>
+                            <td>{{ reclamation.description }}</td>
+                            <td>{{ reclamation.dateReclamation ? reclamation.dateReclamation|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}" class="btn btn-primary">Voir</a>
+                                <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-warning">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="no-records">Aucune réclamation trouvée</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <h2 class="mt-5">Statistiques des réclamations par mois</h2>
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ statistics|map(stat => stat.month)|json_encode|raw }},
+                datasets: [{
+                    label: 'Nombre de réclamations',
+                    data: {{ statistics|map(stat => stat.count)|json_encode|raw }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
+
+
+
+
+
+   

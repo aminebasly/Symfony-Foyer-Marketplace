@@ -1,51 +1,60 @@
-{% block body %}
-<style>
-    .header {
-        text-align: center;
-        color: #4CAF50;
-        font-family: 'Arial', sans-serif;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .table th {
-        background-color: #4CAF50;
-        color: white;
-        text-align: center;
-    }
+        .header .logo img {
+            width: 100px; /* Taille du logo */
+            height: auto;
+            margin-bottom: 10px;
+        }
 
-    .table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin: 0;
+        }
 
-    .table tr:hover {
-        background-color: #ddd;
-    }
+        .info {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
 
-    .table td {
-        text-align: center;
-    }
+        .info span {
+            font-weight: bold;
+        }
 
-    .logo {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50px;
-    }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
 
-    .no-records {
-        text-align: center;
-        font-style: italic;
-    }
-</style>
 
     <h1>Machine index</h1>
 
@@ -75,7 +84,6 @@
         </tbody>
     </table>
   <br>
-
-<br> 
-
-{% endblock %}
+</div>
+</body>
+</html>

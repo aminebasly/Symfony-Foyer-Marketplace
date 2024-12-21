@@ -3,17 +3,29 @@
 {% block title %}Liste des Laveries{% endblock %}
 
 {% block body %}
-<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
-    <h1>Contactez-nous</h1>
-    <p>HOME > CONTACT</p>
+<div class="contact-header" style="background-image: url({{ asset('images/laverie.jpg') }});">
+    <h1>NOS LAVERIES</h1>
+    <p>home > laverie</p>
 </div>
-    <h1>Nos Laveries</h1>
-    <ul>
-        {% for laverie in laveries %}
-            <li>
-                <a href="{{ path('laverie_detail', { id: laverie.id }) }}">{{ laverie.nomLaverie }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+
+
+<div class="row">
+    {% for laverie in laveries %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+               
+                <div class="card-body">
+                    <h5 class="card-title">{{ laverie.nomLaverie }}</h5>
+                     <img src="{{ asset('images/wash-service.png') }}" class="iimg-top" style=" width: 120px;  
+    height: auto; margin: 0 auto; " alt="Image de la laverie">
+                    <p class="card-text">Description de la laverie {{ laverie.nomLaverie }} dans le bloc .</p>
+                    <a href="{{ path('laverie_detail', { id: laverie.id }) }}" class="btn btn-primary">Voir les détails</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
+
 

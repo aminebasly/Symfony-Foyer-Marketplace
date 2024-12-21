@@ -1,0 +1,13 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Edit ReservationChambre{% endblock %}
+
+{% block body %}
+    <h1>Edit ReservationChambre</h1>
+
+    {{ include('reservation_chambre/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_reservation_chambre_index') }}">back to list</a>
+
+    {{ include('reservation_chambre/_delete_form.html.twig') }}
+{% endblock %}

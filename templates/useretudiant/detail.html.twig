@@ -1,38 +1,53 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseu.html.twig' %}
 
 {% block title %}Détails de la Laverie{% endblock %}
 
 {% block body %}
-<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
-    <h1>Contactez-nous</h1>
-    <p>HOME > CONTACT</p>
+<div class="contact-header" style="background-image: url({{asset('images/laverie.jpg')}});">
+    <h1>MACHINES</h1>
+    <p> {{ laverie.nomLaverie }}> MACHINES</p>
 </div>
-    <h1>{{ laverie.nomLaverie }}</h1>
     <h3>Machines disponibles</h3>
     
 
 {% if machines is not empty %}
-    <ul>
-        {% for machine in machines %}
-        {# <form action="{{path('Recherche',{'tt':machine.typeMachine})}}" method=""> #}
-            <li>
-                <span>{{ machine.id }}</span><strong>{{ machine.typeMachine }}</strong> - {{ machine.estReserve ? 'Réservée' : 'Disponible' }}
+ <div class="row">
+    {% set gh = -1 %}
+    
+    {% for machine in machines %}
+         {% set gh = gh + 1 %}
+          
+       
+        <div class="col-md-4">
+            <div class="card mb-4">
+               
+                <div class="card-body">
+        
+
+                
                 {% if machine.estReserve %}
-                    <span>(Réservée jusqu'à {{ machine.heureDebut|date('H:i') }})</span>
-                    <p>Temps restant avant la libération: {{ tempsRestant }}</p>
+                 <img src="{{ asset('images/encours.png') }}" class="iimg-top" style=" width: 140px;  
+    height: auto; margin: 0 auto; " alt="Image de la laverie">
+                    <span>{{ machine.id }}</span><strong>{{ machine.typeMachine }}</strong> - {{ machine.estReserve ? 'Réservée' : 'Disponible' }}
+                    <span>(Réservée jusqu'à {{ tab[gh].fin }})</span>
+                    <p>Temps restant avant la libération: {{ tab[gh].tempsRestant }}</p>
                 {% else %}
-                    <button class="btn btn-primary">Réserver</button>
+                 <img src="{{ asset('images/libre.png') }}" class="iimg-top" style=" width: 140px;  
+    height: auto; margin: 0 auto; " alt="Image de la laverie">
+                    <span>{{ machine.id }}</span><strong>{{ machine.typeMachine }}</strong> - {{ machine.estReserve ? 'Réservée' : 'Disponible' }}
+                    {# <a href="{{ path('laverie_ddetail',{'idd': idd}, {'res': machine.id}) }}" class="btn btn-primary btn-sm">reserver</a> #}
+                    <a href="{{ path('laverie_reservationdddd', {'idd': laverie.id, 'machineId': machine.id}) }}" class="btn btn-primary btn-sm">Réserver</a>
+
                 {% endif %}
-            </li>
-        {% endfor %}
-                {# <input type="text" placeholder="search" name="ss">
-    <input type="submit" value="search">
-    </ul> #}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% else %}
     <p>Aucune machine ne correspond à votre recherche.</p>
 {% endif %}
 
-    
         
 {# <div class="modal" id="reservationModal">
     <div class="modal-content">

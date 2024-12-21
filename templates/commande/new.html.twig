@@ -1,0 +1,11 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une Commande</h1>
+
+    {{ include('commande/_form.html.twig') }}
+
+    <a href="{{ path('app_commande_index') }}">Revenir à la liste</a>
+{% endblock %}

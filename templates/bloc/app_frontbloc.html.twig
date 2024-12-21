@@ -1,0 +1,44 @@
+{% extends 'baseu.html.twig' %}
+
+{% block title %}Liste des Blocs{% endblock %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{ asset('images/chambre.jpg') }});">
+    <h1>BLOCS</h1>
+    <p>home > blocs</p>
+</div>
+
+    <div class="container mt-4">
+        <h1>Liste des Blocs</h1>
+
+        {% if blocs is not empty %}
+            <div class="list-group">
+                {% for bloc in blocs %}
+                    <div class="list-group-item">
+                        <h4>{{ bloc.nomBloc }} ({{ bloc.capaciteBloc }} chambres)</h4>
+
+                        <div>
+                            <strong>Capacité du Bloc :</strong> {{ bloc.capaciteBloc }} chambres
+                        </div>
+                        <div>
+                            <strong>Chambres dans ce Bloc :</strong>
+                            {% if bloc.chambres|length > 0 %}
+                                <ul class="list-group mt-2">
+                                    {% for chambre in bloc.chambres %}
+                                        <li class="list-group-item">
+                                            Chambre N° {{ chambre.numChambre }} - Étage : {{ chambre.etage }} - Capacité : {{ chambre.capacite }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Aucune chambre associée à ce bloc.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aucun bloc n'a été trouvé.</p>
+        {% endif %}
+    </div>
+{% endblock %}

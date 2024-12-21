@@ -1398,3 +1398,10 @@ input[type="number"] {
     text-decoration: none;
     cursor: pointer;
 }
+
+
+.iimg-top {
+    width: 10px;   /* Ajustez la largeur de l'icône */
+    height: auto;   /* Maintient la proportion de l'image */
+    margin: 0 auto; /* Centrer l'image */
+}

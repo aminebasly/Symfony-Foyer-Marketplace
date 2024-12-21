@@ -1,0 +1,54 @@
+{% extends 'marketplace/index.html.twig' %}
+
+{% block title %}Détail du Produit - {{ produit.nomProduit }}{% endblock %}
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="card shadow-lg p-4">
+        <div class="row">
+            <!-- Section image -->
+            <div class="col-md-6 text-center">
+            <img src="{{ asset('uploads/images/' ~ produit.image) }}" alt="Image de {{ produit.nomProduit}}" style="width: 80px; height: auto;">
+            </div>
+            
+            <!-- Section détail produit -->
+            <div class="col-md-6">
+                <h1 class="display-5">{{ produit.nomProduit }}</h1>
+                <p class="text-muted">{{ produit.typeProduit }}</p>
+                <p class="lead">{{ produit.description }}</p>
+                
+                <h3 class="text-primary">{{ produit.prix }} TND</h3>
+                <p class="text-success">{{ produit.stock > 0 ? produit.stock ~ ' en stock' : 'Rupture de stock' }}</p>
+                
+                <!-- Boutons -->
+                <div class="mt-4">
+                    
+                    {% if produit.stock > 0 %}
+                        <form action="{{ path('app_produit_ajouter_panier', {'id': produit.id}) }}" method="post">
+                    <!-- Quantité -->
+                    <div class="form-group mb-3">
+                        <label for="quantity">Quantité</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1" max="{{ produit.stock }}" required>
+                    </div>
+
+                    <!-- Bouton d'ajout au panier -->
+                    {% if produit.stock > 0 %}
+                    <a href="{{ path('add', {id: produit.id}) }}" class="btn btn-success">Ajouter au panier</a>
+                {% else %}
+                    <p class="text-danger">Temporairement en rupture de stock</p>
+                {% endif %}
+                </form>
+                    {% endif %}
+                    <a href="{{ path('app_etudiant_produit_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Revenir à la liste
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

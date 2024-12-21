@@ -1,0 +1,33 @@
+
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Modifier la réclamation{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="page-title">Modifier la Réclamation</h1>
+
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Modifiez les détails de votre réclamation</h2>
+            </div>
+            
+            {{ include('reclamation/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+            <div class="actions">
+                <a href="{{ path('app_reclamation_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+
+            {{ include('reclamation/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+    
+
+
+
+

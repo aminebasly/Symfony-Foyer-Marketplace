@@ -1,19 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'basedash.html.twig' %}
 
 {% block title %}Laverie index{% endblock %}
 
 {% block body %}
-<div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
-    <h1>Contactez-nous</h1>
-    <p>HOME > CONTACT</p>
-</div>
+
     <h1>Laverie index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>IdLaverie</th>
                 <th>NomLaverie</th>
                 <th>actions</th>
             </tr>
@@ -24,17 +20,17 @@
                 <td>{{ laverie.id }}</td>
                 <td>{{ laverie.nomLaverie }}</td>
                 <td>
-                    <a href="{{ path('app_laverie_show', {'id': laverie.id}) }}">show</a>
-                    <a href="{{ path('app_laverie_edit', {'id': laverie.id}) }}">edit</a>
+                    <a href="{{ path('app_laverie_show', {'id': laverie.id}) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('app_laverie_edit', {'id': laverie.id}) }}" class="btn btn-primary">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucune laverie trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_laverie_new') }}">Create new</a>
+    <a href="{{ path('app_laverie_new') }}" class="btn btn-primary">Ajouter une!</a>
 {% endblock %}

@@ -13,18 +13,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\UserRepository;
 
 #[Route('/laverie')]
 final class LaverieController extends AbstractController{
-    #[Route(name: 'app_laverie_index', methods: ['GET'])]
-    public function index(LaverieRepository $laverieRepository): Response
+    #[Route('/laverie/{id}' , name: 'app_laverie_index', methods: ['GET','POST'])]
+    public function index($id,UserRepository $userRepository,LaverieRepository $laverieRepository): Response
     {
+        $user = $userRepository->find($id);
         $laveries = $laverieRepository->findAll();
-
+        $id = $user->getId();
         return $this->render('useretudiant/laveries.html.twig', [
             'laveries' => $laveries,
+            'id' => $id,
+            'user' =>$user
         ]);
     }
+
+    #[Route('/laverie1' , name: 'app_laverie_index1', methods: ['GET','POST'])]
+    public function index1(LaverieRepository $laverieRepository): Response
+    {
+        
+        $laveries = $laverieRepository->findAll();
+       
+        return $this->render('laverie/index.html.twig', [
+            'laveries' => $laveries,
+
+        ]);
+    }
+
     #[Route('/laveries', name: 'laveries')]
     public function inde(LaverieRepository $laverieRepository): Response
     {
@@ -35,18 +52,97 @@ final class LaverieController extends AbstractController{
         ]);
     }
 
-    #[Route('/laverie/{id}', name: 'laverie_detail')]
+    #[Route('/laveriedet/{id}', name: 'laverie_detail')]
     public function detail(Laverie $laverie,Machine $machine, MachineRepository $machineRepository): Response
     {
+        $machinesAvecTempsRestant = [];
+
         $machines = $machineRepository->findBy(['laverie' => $laverie]);
-        $tempsRestant = $machineRepository->getTempsRestant($machine);
+        
+        
+        foreach ($machines as $machine) {
+            $tempsRestant = $machineRepository->getTempsRestant($machine->getId());
+            $fin = $machineRepository->getfin($machine->getId());
+            $machinesAvecTempsRestant[] = [
+                
+                'tempsRestant' => $tempsRestant,
+                'fin' => $fin
+                
+            ];
+        }
         return $this->render('useretudiant/detail.html.twig', [
             'laverie' => $laverie,
             'machines' => $machines,
             'machine' => $machine,
-            'tempsRestant' => $tempsRestant, 
+            'tab' => $machinesAvecTempsRestant,
+           
         ]);
     }
+
+
+
+
+
+
+
+    #[Route('/laveriedetR', name: 'laverie_reservationdddd')]
+    public function details(
+        LaverieRepository $laverieRepository,
+       
+        MachineRepository $machineRepository,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+      
+        $laverieId = $request->query->get('idd');       // Récupère 'idd'
+        $machineId = $request->query->get('machineId'); // Récupère 'machineId'
+      
+        $laverie = $laverieRepository->find($laverieId);
+        $machine = $machineRepository->find($machineId);
+      
+        // Récupérer les machines associées à la laverie
+        $machines = $machineRepository->findBy(['laverie' => $laverie]);
+    
+        // Récupérer la machine spécifiée par machineId
+       
+    
+        
+    
+        // Créer une instance du formulaire
+        $form = $this->createForm(ReservationMachineType::class, $machine);
+        $form->handleRequest($request);
+    
+        // Vérifier si le formulaire a été soumis et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer les données du formulaire
+            $reservationData = $form->getData();
+    
+            // Mettre à jour les propriétés de la machine
+            $machine->setDureeReserve($reservationData->getDureeReserve());
+            $machine->setEstReserve(1);
+            $machine->setStatutMachine("en cours");
+    
+            // Sauvegarder les modifications dans la base de données
+            $entityManager->persist($machine);
+            $entityManager->flush();
+    
+            // Rediriger ou afficher un message de confirmation
+            $this->addFlash('success', 'Réservation effectuée avec succès !');
+            return $this->redirectToRoute('laverie_detail', ['id' => $laverieId]);
+        }
+    
+        // Afficher le formulaire et les machines dans le template
+        return $this->render('useretudiant/Reserver.html.twig', [
+            
+            'form' => $form->createView(),
+        ]);
+    }
+    
+
+
+
+
+
 
     #[Route('/machine/{id}/reserver', name: 'reserver_machine', methods: ['POST'])]
     public function reserver(Machine $machine, Request $request, EntityManagerInterface $em): Response
@@ -102,12 +198,13 @@ final class LaverieController extends AbstractController{
             $entityManager->persist($laverie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_laverie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_laverie_index1', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('laverie/new.html.twig', [
             'laverie' => $laverie,
-            'form' => $form,
+            'form' => $form
+        
         ]);
     }
 
@@ -128,7 +225,7 @@ final class LaverieController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_laverie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_laverie_index1', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('laverie/edit.html.twig', [
@@ -145,6 +242,6 @@ final class LaverieController extends AbstractController{
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_laverie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_laverie_index1', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -16,28 +16,51 @@ class ChambreRepository extends ServiceEntityRepository
         parent::__construct($registry, Chambre::class);
     }
 
-//    /**
-//     * @return Chambre[] Returns an array of Chambre objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function searchAndFilter(array $criteria): array
+    {
+        $qb = $this->createQueryBuilder('c');
 
-//    public function findOneBySomeField($value): ?Chambre
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        
+        if (!empty($criteria['numChambre'])) {
+            $qb->andWhere('c.numChambre LIKE :numChambre')
+                ->setParameter('numChambre', '%' . $criteria['numChambre'] . '%');
+        }
+
+        
+        if (!empty($criteria['etage_min']) && !empty($criteria['etage_max'])) {
+            $qb->andWhere('c.etage BETWEEN :etage_min AND :etage_max')
+                ->setParameter('etage_min', $criteria['etage_min'])
+                ->setParameter('etage_max', $criteria['etage_max']);
+        }
+
+        
+        if (!empty($criteria['capacite_min']) && !empty($criteria['capacite_max'])) {
+            $qb->andWhere('c.capacite BETWEEN :capacite_min AND :capacite_max')
+                ->setParameter('capacite_min', $criteria['capacite_min'])
+                ->setParameter('capacite_max', $criteria['capacite_max']);
+        }
+
+       
+
+
+        
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAvailableChambres(\DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.reservationChambres', 'r')
+        ->andWhere(':startDate NOT BETWEEN r.anneeUniversitaire AND r.dateFinReservation')
+        ->andWhere(':endDate NOT BETWEEN r.anneeUniversitaire AND r.dateFinReservation')
+        ->orWhere('r.idReservationChambre IS NULL') // Pas de réservation associée
+        ->setParameter('startDate', $startDate)
+        ->setParameter('endDate', $endDate)
+        ->getQuery()
+        ->getResult();
+}
+
+
+
 }

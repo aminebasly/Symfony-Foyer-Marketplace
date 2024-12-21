@@ -12,13 +12,17 @@ class UseretudiantController extends AbstractController
 {
 
     
-    #[Route('/useretudiant', name: 'app_useretudiant')]
-    public function index(UserRepository $userRepository, MachineRepository $mr): Response
+    #[Route('/useretudiant/{id}', name: 'app_useretudiant', methods: ['GET', 'POST'])]
+    public function index($id,UserRepository $userRepository, MachineRepository $mr): Response
     {
+        $user = $userRepository->find($id);
+
         
         return $this->render('useretudiant/index.html.twig', [
             'controller_name' => 'UseretudiantController',
-                'users' => $userRepository->findAll(),
+            'id' => $id,
+                'nom' => $user->getNom(),
+                'prenom'=>$user->getPrenom(),
                 'machines' =>$mr->findAll()
             
         ]);

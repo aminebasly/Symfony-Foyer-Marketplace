@@ -1,0 +1,42 @@
+{% extends 'basedash.html.twig' %}
+{% block title %}Chambre{% endblock %}
+
+{% block body %}
+
+<form method="get" action="{{ path('app_front_chambre1') }}">
+    <div>
+        <label for="numChambre">Numéro de Chambre :</label>
+        <input type="text" name="numChambre" id="numChambre" value="{{ searchTerms.numChambre }}">
+    </div>
+    <div>
+        <label for="etage_min">Étage (Min) :</label>
+        <input type="number" name="etage_min" id="etage_min" value="{{ searchTerms.etage_min }}">
+    </div>
+    <div>
+        <label for="etage_max">Étage (Max) :</label>
+        <input type="number" name="etage_max" id="etage_max" value="{{ searchTerms.etage_max }}">
+    </div>
+    <div>
+        <label for="capacite_min">Capacité (Min) :</label>
+        <input type="number" name="capacite_min" id="capacite_min" value="{{ searchTerms.capacite_min }}">
+    </div>
+    <div>
+        <label for="capacite_max">Capacité (Max) :</label>
+        <input type="number" name="capacite_max" id="capacite_max" value="{{ searchTerms.capacite_max }}">
+    </div>
+    <button type="submit">Rechercher</button>
+</form>
+{% if chambres is not empty %}
+    <h2>Résultats :</h2>
+    <ul>
+        {% for chambre in chambres %}
+            <li>
+                Chambre N° {{ chambre.numChambre }}, Étage : {{ chambre.etage }}, 
+                Capacité : {{ chambre.capacite }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucune chambre ne correspond aux critères de recherche.</p>
+{% endif %}
+{% endblock %}

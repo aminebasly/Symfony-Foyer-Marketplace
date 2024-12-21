@@ -17,28 +17,67 @@ class MachineRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Machine::class);
     }
-    public function getTempsRestant(Machine $machine): ?string
+    public function getTempsRestant(int $machineId): string
     {
-        
-        if ($machine->getHeureDebut() === null || $machine->getDureeReserve() === null) {
-            return null;  
+        // Récupérer la machine par son ID
+        $machine = $this->find($machineId);
+    
+        // Vérification que la machine existe et que la durée est valide
+        $dureeMinutes = $machine->getDureeReserve();
+        if (!$machine || !$dureeMinutes || !is_numeric($dureeMinutes)) {
+            return "La machine est disponible.";
         }
-        $heureDebut = $machine->getHeureDebut();
-
-     
-
-        $now = new DateTime();
-        $endTime = clone $heureDebut; 
-        $endTime->modify("+{$machine->getDureeReserve()} minutes");
-
-        if ($now > $endTime) {
-            return 'Expired'; 
+    
+        // Obtenir la date actuelle
+        $dateActuelle = new \DateTime();
+    
+        // Calculer la date de fin en ajoutant dureeReserve à la date actuelle
+        $finReservation = clone $dateActuelle;
+        $finReservation->modify("+$dureeMinutes minutes");
+    
+        // Calculer l'intervalle restant
+        $intervalle = $dateActuelle->diff($finReservation);
+    
+        // Convertir l'intervalle en minutes restantes
+        $minutesRestantes = ($intervalle->days * 24 * 60) + ($intervalle->h * 60) + $intervalle->i;
+    
+        // Retourner le résultat formaté
+        if ($minutesRestantes > 60) {
+            $heures = floor($minutesRestantes / 60);
+            $minutes = $minutesRestantes % 60;
+            return "Temps restant : {$heures} heures et {$minutes} minutes";
+        } elseif ($minutesRestantes > 0) {
+            return "Temps restant : {$minutesRestantes} minutes";
+        } else {
+            return "La machine est disponible.";
         }
-
-       
-        $remainingTime = $now->diff($endTime);
-        return $remainingTime->format('%H:%I:%S'); 
     }
+
+
+    public function getFin(int $machineId): string
+{
+    // Récupérer la machine par son ID
+    $machine = $this->find($machineId);
+
+    // Vérification que la machine existe et que la durée est valide
+    $dureeMinutes = $machine->getDureeReserve();
+    if (!$machine || !$dureeMinutes || !is_numeric($dureeMinutes)) {
+        return "La machine est disponible.";
+    }
+
+    // Obtenir la date actuelle
+    $dateActuelle = new \DateTime();
+
+    // Calculer la date de fin en ajoutant dureeReserve à la date actuelle
+    $finReservation = clone $dateActuelle;
+    $finReservation->modify("+$dureeMinutes minutes");
+
+    // Retourner la date de fin formatée
+    return $finReservation->format('Y-m-d H:i:s'); // Format au choix
+}
+
+    
+
 
     function RechercheType(){
         $em=$this->getEntityManager();

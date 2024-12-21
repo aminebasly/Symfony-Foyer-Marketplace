@@ -1,0 +1,54 @@
+{% extends 'marketplace/index.html.twig' %}
+
+{% block title %}Liste des Produits{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4">Nos Produits</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="category-carousel swiper">
+                <div class="swiper-wrapper">
+                    {% for produit in produits %}
+                        <a href="{{ path('app_etudiant_produit_show', {'id': produit.id}) }}" class="nav-link category-item swiper-slide">
+                            <img src="{{ asset('uploads/images/' ~ produit.image) }}" alt="Image de {{ produit.nomProduit}}" style="width: 80px; height: auto;">
+                            <h3 class="category-title">{{ produit.nomProduit }}</h3>
+                            <p class="category-price">{{ produit.prix }} TND</p>
+                        </a>
+                    {% else %}
+                        <div class="swiper-slide">
+                            <p>Aucun produit disponible pour le moment.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: { slidesPerView: 1, spaceBetween: 10 },
+                768: { slidesPerView: 2, spaceBetween: 15 },
+                1024: { slidesPerView: 4, spaceBetween: 20 },
+            },
+        });
+    });
+</script>
+
+{% endblock %}
+

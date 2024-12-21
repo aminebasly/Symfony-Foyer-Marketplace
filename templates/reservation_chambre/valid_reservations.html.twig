@@ -1,0 +1,30 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Réservations Validées{% endblock %}
+
+{% block body %}
+<h1>Réservations Validées</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Chambre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.idReservationChambre }}</td>
+                <td>{{ reservation.anneeUniversitaire|date('d/m/Y') }}</td>
+                <td>{{ reservation.chambre.numChambre }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune réservation validée trouvée.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -31,6 +31,9 @@ final class MachineController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
+
             $entityManager->persist($machine);
             $entityManager->flush();
 
@@ -68,6 +71,35 @@ final class MachineController extends AbstractController{
             'form' => $form,
         ]);
     }
+
+    function calculerTempsRestant(\DateTime $debutReservation, int $dureeMinutes): string
+    {
+        // Obtenir la date et l'heure actuelles
+        $dateActuelle = new \DateTime();
+    
+        // Calculer la date de fin en ajoutant la durée à la date de début
+        $finReservation = clone $debutReservation;
+        $finReservation->modify("+$dureeMinutes minutes");
+    
+        // Calculer l'intervalle restant
+        $intervalle = $dateActuelle->diff($finReservation);
+    
+        // Convertir l'intervalle en minutes totales restantes
+        $minutesRestantes = ($intervalle->days * 24 * 60) + ($intervalle->h * 60) + $intervalle->i;
+    
+        // Retourner un message formaté
+        if ($minutesRestantes > 60) {
+            $heures = floor($minutesRestantes / 60);
+            $minutes = $minutesRestantes % 60;
+            return "Temps restant : {$heures} heures et {$minutes} minutes";
+        } elseif ($minutesRestantes > 0) {
+            return "Temps restant : {$minutesRestantes} minutes";
+        } else {
+            return "La machine est disponible.";
+        }
+    }
+    
+
     #[Route('/recherche/{tt}',name:'Recherche')]
     function recherche($tt,Request $request,MachineRepository $repo){
         $tt=$request->get('ss');

@@ -1,0 +1,10 @@
+{% extends 'basedash.html.twig' %}
+{% block body %}
+<h2>Statistiques du Bloc {{ bloc.nomBloc }}</h2>
+<ul>
+    <li>Total de chambres : {{ statistiques.totalChambres }}</li>
+    <li>Capacité totale des chambres : {{ statistiques.capaciteTotale }}</li>
+    <li>Capacité moyenne des chambres : {{ statistiques.capaciteMoyenne }}</li>
+    <li>Chambres disponibles : {{ statistiques.chambresDisponibles }}</li>
+</ul>
+{% endblock %}

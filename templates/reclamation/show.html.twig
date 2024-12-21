@@ -1,0 +1,116 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Détails de la réclamation{% endblock %}
+
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="page-title">Détails de la réclamation</h1>
+
+        <div class="reclamation-details">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ reclamation.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Catégorie</th>
+                        <td>{{ reclamation.categorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Objet</th>
+                        <td>{{ reclamation.objet }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ reclamation.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date de réclamation</th>
+                        <td>{{ reclamation.dateReclamation ? reclamation.dateReclamation|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="action-buttons">
+                <a href="{{ path('app_reclamation_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}" class="btn btn-warning">Modifier</a>
+            </div>
+
+            {{ include('reclamation/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+    <!-- Section Réservation -->
+    <section id="reservation">
+        <h2>Réservez votre chambre</h2>
+        <input type="text" id="datepicker" placeholder="Sélectionnez la date">
+        <button>Réserver maintenant</button>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services">
+        <h2>Nos Services</h2>
+        <div class="service-card">
+            <img src="images/restaurant-icon.png" alt="Restauration">
+            <h3>Restauration</h3>
+            <p>Repas sains et variés, préparés chaque jour</p>
+        </div>
+        <div class="service-card">
+            <img src="images/room-icon.png" alt="Chambres">
+            <h3>Chambres</h3>
+            <p>Confort et services adaptés à vos besoins</p>
+        </div>
+    </section>
+
+
+
+
+    <!-- Section Contact -->
+    <section id="contact">
+        <h2>Contactez-nous</h2>
+        <form>
+            <input type="text" placeholder="Nom" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Message" required></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="parallax.min.js"></script>
+    <script>
+        // Initialisation du calendrier
+        $(document).ready(function(){
+            $("#datepicker").datepicker();
+        });
+
+        // Initialisation du parallax
+        $('.parallax-window').parallax();
+    </script>
+</body>
+</html>
+
+
+
+
+

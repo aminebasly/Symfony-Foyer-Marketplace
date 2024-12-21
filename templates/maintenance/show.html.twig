@@ -1,0 +1,61 @@
+{% extends 'basedash.html.twig' %}
+{% block title %}Maintenance{% endblock %}
+
+{% block body %}
+
+
+<div class="container mt-5">
+    <h1 class="mb-4">Maintenance</h1>
+
+    <div class="card">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ maintenance.id }}</td>
+                </tr>
+                <tr>
+                    <th>Start Time</th>
+                    <td>{{ maintenance.startTime ? maintenance.startTime|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>End Time</th>
+                    <td>{{ maintenance.endTime ? maintenance.endTime|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex">
+        <a href="{{ path('app_maintenance_index') }}">Revenir à la liste</a>
+        <a href="{{ path('app_maintenance_edit', {'id': maintenance.id}) }}">Modifier</a>
+    </div>
+
+    {{ include('maintenance/_delete_form.html.twig') }}
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="parallax.min.js"></script>
+    <script>
+        // Initialisation du calendrier
+        $(document).ready(function(){
+            $("#datepicker").datepicker();
+        });
+
+        // Initialisation du parallax
+        $('.parallax-window').parallax();
+    </script>
+
+{% endblock %}
+
+
+    
+
+
+
+
+
+
+
+

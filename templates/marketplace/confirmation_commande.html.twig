@@ -1,0 +1,12 @@
+{% extends 'marketplace/index.html.twig' %}
+
+{% block body %}
+<div class="container my-5">
+    <h1>Commande bien passée!</h1>
+    <p>Merci pour votre confiance à Edutine !</p>
+    <p>Numéro de commande : {{ commande.id }}</p>
+    <p>Montant total : {{ commande.totalCommande }} TND</p>
+    <a href="{{ path('confirmation_commande', { id: commande.id }) }}" class="btn btn-primary">Retour à l'acceuil</a>
+
+</div>
+{% endblock %}

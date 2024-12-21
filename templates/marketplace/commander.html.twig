@@ -1,0 +1,22 @@
+{% extends 'marketplace/index.html.twig' %}
+
+{% block title %}Ajouter au panier - {{ produit.nomProduit }}{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="card shadow-lg p-4">
+        <div class="row">
+            <!-- Image et résumé du produit -->
+            <div class="col-md-6 text-center">
+                <img src="{{ produit.image ? asset(produit.image) : asset('market/images/default-placeholder.png') }}" 
+                     alt="{{ produit.nomProduit }}" 
+                     class="img-fluid rounded shadow mb-3">
+                <h2>{{ produit.nomProduit }}</h2>
+                <p class="text-muted">{{ produit.typeProduit }}</p>
+                <h3 class="text-primary">{{ produit.prix }} TND</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

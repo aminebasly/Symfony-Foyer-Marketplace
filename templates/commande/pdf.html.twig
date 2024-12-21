@@ -1,0 +1,85 @@
+{% block title%}
+<img src="{{ asset('Dash/assets/img/favicon/logoooooooo.svg') }}" alt="Logo de l'entreprise" class="logo">
+{% endblock %}
+{% block body %}
+
+<style>
+    .header {
+        text-align: center;
+        color: rgb(168, 151, 245);
+        font-family: 'Arial', sans-serif;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color:rgb(168, 151, 245);
+        color: white;
+        text-align: center;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+        background-color: #ddd;
+    }
+
+    .table td {
+        text-align: center;
+    }
+
+    .logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50px;
+    }
+
+    .no-records {
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+
+<h1 class="header">Liste des articles</h1>
+<hr>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateCommande</th>
+                <th>DateConfirmation</th>
+                <th>TotalCommande</th>
+                <th>StatutCommande</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.dateConfirmation ? commande.dateConfirmation|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.totalCommande }}</td>
+                <td>{{ commande.statutCommande }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune commande trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

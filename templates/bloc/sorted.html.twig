@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blocs Triés par Capacité{% endblock %}
+
+{% block body %}
+<h1>Blocs Triés par Capacité</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Bloc</th>
+            <th>Capacité</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bloc in blocs %}
+            <tr>
+                <td>{{ bloc.nomBloc }}</td>
+                <td>{{ bloc.capaciteBloc }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Aucun bloc trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -3,52 +3,75 @@
 namespace App\Entity;
 
 use App\Repository\ChambreRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ChambreRepository::class)]
 class Chambre
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(name: "idChambre")]
+    private ?int $idChambre = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le numéro de la chambre est obligatoire.")]
+    #[Assert\Length(
+    min: 1,
+    max: 8,
+    minMessage: "Le numéro de la chambre doit contenir au moins 1 caractère.",
+    maxMessage: "Le numéro de la chambre ne peut pas dépasser 8 caractères.")]
+
+    #[Assert\Regex(
+    pattern: "/^\d+$/",
+    message: "Le numéro de la chambre doit uniquement contenir des chiffres.")]
+
+    private ?string $numChambre = null;
 
     #[ORM\Column]
-    private ?int $numChambre = null;
-
-    #[ORM\Column]
+    #[Assert\NotNull(message: "L'étage est obligatoire.")]
+    #[Assert\PositiveOrZero(message: "L'étage doit être un nombre positif ou nul.")]
+    #[Assert\Range(
+        min: 0,
+        max: 10,
+        notInRangeMessage: "L'étage doit être compris entre 0 et 10 ."
+    )]
     private ?int $etage = null;
 
     #[ORM\Column]
-    private ?int $capaciteChambre = null;
+    #[Assert\NotBlank(message: "La capacité de la chambre est obligatoire.")]
+    #[Assert\Positive(message: "La capacité doit être strictement positive.")]
+    private ?int $capacite = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $typeChambre = null;
+    #[Assert\NotBlank(message: "Le type de la chambre est obligatoire.")]
+    #[Assert\Choice(
+    choices: ['simple', 'double', 'suite'],
+    message: "Le type de chambre doit être 'simple', 'double' ou 'suite'.")]
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'chambre')]
-    private Collection $user;
+    #[Assert\Length(
+    max: 10 ,
+    maxMessage: "Le type de la chambre ne peut pas dépasser 10 caractères.")]
 
-    public function __construct()
+    private ?string $type = null;
+
+    #[ORM\ManyToOne(targetEntity: Bloc::class, inversedBy: 'chambres')]
+    #[ORM\JoinColumn(name: "bloc_id", referencedColumnName: "id_bloc", nullable: false)]
+    private ?Bloc $bloc = null;
+
+   
+
+    public function getIdChambre(): ?int
     {
-        $this->user = new ArrayCollection();
+        return $this->idChambre;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getNumChambre(): ?int
+    public function getNumChambre(): ?string
     {
         return $this->numChambre;
     }
 
-    public function setNumChambre(int $numChambre): static
+    public function setNumChambre(string $numChambre): static
     {
         $this->numChambre = $numChambre;
 
@@ -67,57 +90,41 @@ class Chambre
         return $this;
     }
 
-    public function getCapaciteChambre(): ?int
+    public function getCapacite(): ?int
     {
-        return $this->capaciteChambre;
+        return $this->capacite;
     }
 
-    public function setCapaciteChambre(int $capaciteChambre): static
+    public function setCapacite(int $capacite): static
     {
-        $this->capaciteChambre = $capaciteChambre;
+        $this->capacite = $capacite;
 
         return $this;
     }
 
-    public function getTypeChambre(): ?string
+    public function getType(): ?string
     {
-        return $this->typeChambre;
+        return $this->type;
     }
 
-    public function setTypeChambre(string $typeChambre): static
+    public function setType(string $type): static
     {
-        $this->typeChambre = $typeChambre;
+        $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUser(): Collection
+    public function getBloc(): ?Bloc
     {
-        return $this->user;
+        return $this->bloc;
     }
 
-    public function addUser(User $user): static
+    public function setBloc(?Bloc $bloc): static
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-            $user->setChambre($this);
-        }
+        $this->bloc = $bloc;
 
         return $this;
     }
 
-    public function removeUser(User $user): static
-    {
-        if ($this->user->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getChambre() === $this) {
-                $user->setChambre(null);
-            }
-        }
-
-        return $this;
-    }
+   
 }

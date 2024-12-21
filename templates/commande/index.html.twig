@@ -1,0 +1,50 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Commande {% endblock %}
+
+{% block body %}
+    <h1>Commande </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateCommande</th>
+                <th>DateConfirmation</th>
+                <th>TotalCommande</th>
+                <th>StatutCommande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.dateConfirmation ? commande.dateConfirmation|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.totalCommande }}</td>
+                <td>{{ commande.statutCommande }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-show"></i>Voir</a>
+                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-edit"></i> Modifier
+                        </a>
+                        <a href="{{ path('app_commande_delete', {'id': commande.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune commande trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+<a href="{{ path('pdf') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-show"></i>Exporter en pdf</a>
+<br>
+
+{% endblock %}

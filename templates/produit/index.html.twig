@@ -1,0 +1,63 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Produit {% endblock %}
+
+{% block body %}
+    <h1>Produit </h1>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-secondary mb-3">
+    Ajouter un produit
+    <span class="btn-icon-right"><i class="fa fa-plus"></i></span>
+    <a href="{{ path('app_produit_recherche') }}" class="btn btn-secondary mb-3">
+    Rechercher un produit
+    <span class="btn-icon-right"><i class="fa fa-search"></i></span>
+</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>RefProduit</th>
+                <th>NomProduit</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>TypeProduit</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.refProduit }}</td>
+                <td>{{ produit.nomProduit }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.stock }}</td>
+                <td>{{ produit.typeProduit }}</td>
+                <td>
+                {% if produit.image %}
+                            <img src="{{ asset('uploads/images/' ~ produit.image) }}" alt="Image de {{ produit.nomProduit}}" style="width: 80px; height: auto;">
+                        {% else %}
+                            <span class="text-muted">Pas d'image</span>
+                        {% endif %}</td>
+                <td>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-show"></i>Voir</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-edit"></i> Modifier
+                        </a>
+                        <a href="{{ path('app_produit_delete', {'id': produit.id}) }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucun produit trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

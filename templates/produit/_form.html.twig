@@ -1,0 +1,65 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
+        <div class="mb-3">
+            <label for="{{ form.refProduit.vars.id }}" class="form-label">{{ form.refProduit.vars.label }}</label>
+            {{ form_widget(form.refProduit, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.refProduit.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.nomProduit.vars.id }}" class="form-label">{{ form.nomProduit.vars.label }}</label>
+            {{ form_widget(form.nomProduit, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.nomProduit.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.description.vars.id }}" class="form-label">{{ form.description.vars.label }}</label>
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.description.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.prix.vars.id }}" class="form-label">{{ form.prix.vars.label }}</label>
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.prix.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.stock.vars.id }}" class="form-label">{{ form.stock.vars.label }}</label>
+            {{ form_widget(form.stock, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.stock.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.typeProduit.vars.id }}" class="form-label">{{ form.typeProduit.vars.label }}</label>
+            {{ form_widget(form.typeProduit, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.typeProduit.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.image.vars.id }}" class="form-label">{{ form.image.vars.label }}</label>
+            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+            {% for error in form.image.vars.errors %}
+                <div class="alert alert-danger"><strong>{{ error.message }}</strong></div>
+            {% endfor %}
+        </div>
+
+
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">
+                Ajouter <span class="btn-icon-right"><i class="fa fa-check"></i></span>
+            </button>
+        </div>
+    {{ form_end(form) }}

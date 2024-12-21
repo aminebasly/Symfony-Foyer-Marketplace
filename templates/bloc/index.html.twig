@@ -1,0 +1,47 @@
+{% extends 'basedash.html.twig' %}
+
+{% block title %}Bloc index{% endblock %}
+
+{% block body %}
+    <div class="contact-header" style="background-image: url({{asset('images/fond.jpg')}});">
+    <h1>Bloc</h1>
+    <p>HOME > BLOCS</p>
+</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdBloc</th>
+                <th>NomBloc</th>
+                <th>CapaciteBloc</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bloc in blocs %}
+            <tr>
+                <td>{{ bloc.idBloc }}</td>
+                <td>{{ bloc.nomBloc }}</td>
+                <td>{{ bloc.capaciteBloc }}</td>
+                <td>
+                    <div class="d-inline-flex"> <button type="button" class="btn btn-primary" onclick="window.location.href='{{ path('app_bloc_show1', {'idBloc': bloc.idBloc}) }}'">Voir</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='{{ path('app_bloc_edit', {'idBloc': bloc.idBloc}) }}'">Modifier</button>
+                        <form method="post" action="{{ path('app_bloc_delete', {'idBloc': bloc.idBloc}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ bloc.idBloc) }}">
+                            <input type="hidden" name="_method" value="DELETE"> <button class="btn btn-danger">Supprimer</button>
+                        
+                        </form>
+                    <a href="{{ path('bloc_show', {'idBloc': bloc.idBloc}) }}" class="btn btn-success" >Statistiques</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+
+    <a href="{{ path('app_bloc_new') }}"class="btn btn-success">Créer un nouveau Bloc</a>
+{% endblock %}

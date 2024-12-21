@@ -1,0 +1,26 @@
+
+{% extends 'baseu.html.twig' %}
+
+{% block body %}
+<div class="contact-header" style="background-image: url({{ asset('images/reclamation.jpg') }});">
+    <h1>RECLAMATION</h1>
+    <p>home > reclamation</p>
+</div>
+
+    <h1>Ajouter une Reclamation</h1>
+
+    {{ include('reclamation/_form.html.twig') }}
+
+    <a href="{{ path('app_reclamation_index') }}">Revenir</a>
+{% endblock %}
+
+
+
+   
+
+
+
+
+
+
+

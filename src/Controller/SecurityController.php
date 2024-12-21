@@ -20,7 +20,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class SecurityController extends AbstractController
 {
     
-#[Route('/loginn', name: 'app_login', methods: ['GET', 'POST'])]
+#[Route('/loginn', name: 'app_login', methods: ['GET','POST'])]
 public function verif(UserRepository $userRepository, Request $request,MachineRepository $mr): Response
 {
     $login = new User();
@@ -37,16 +37,20 @@ public function verif(UserRepository $userRepository, Request $request,MachineRe
         if ($user && $user->getMotDePasse() === $login->getMotDePasse()) {
            
             if ($user->getRole() === 'Étudiant') {
-                $prenom = $user->getPrenom();
-                $nom = $user->getNom();
-                return $this->redirectToRoute('app_useretudiant',['nom'=>$nom,'prenom'=>$prenom]);
-            } else {
-                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+                $id = $user->getId();
+                return $this->redirectToRoute('app_useretudiant',['id'=>$id]);
+            } elseif ($user->getRole() === 'admin'){
+                return $this->redirectToRoute('app_dash', [], Response::HTTP_SEE_OTHER);
             }
+            else {
+                $this->addFlash('error', 'Identifiants invalides.');
+            }
+            
         } else {
             
             $this->addFlash('error', 'Identifiants invalides.');
         }
+
     }
 
     return $this->render('login/index.html.twig', [

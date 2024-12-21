@@ -24,7 +24,7 @@ class Machine
     #[ORM\Column]
     private ?bool $estReserve = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $heureDebut = null;
 
     #[ORM\Column(nullable: true)]
